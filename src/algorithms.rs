@@ -96,6 +96,54 @@ fn partition(vec: &mut [i32]) -> usize {
     i as usize
 }
 
+pub fn counting_sort(vec: &mut [i32]) -> Vec<i32> {
+    let n = vec.len();
+    let mut max = i32::MIN;
+
+    // find the max in the input array
+    for i in 0..n {
+        max = std::cmp::max(max, vec[i]);
+    }
+
+    let mut counts: Vec<i32> = vec![0; (max + 1) as usize];
+
+    // count the occurrences of every value found in the input
+    for i in 0..n {
+        counts[vec[i] as usize] += 1;
+    }
+
+    // println!("INITIALIZED COUNTS:");
+    // print_vec(&counts, 50);
+
+    // convert the counts into the number of items less than or equal to each value
+    for i in 1..counts.len() {
+        counts[i] += counts[i - 1 as usize];
+    }
+
+    // println!("COUNTS of ITEMS LESS THAN EACH:");
+    // print_vec(&counts, 50);
+    // println!();
+
+    let mut output = vec![0; n];
+
+    for i in (0..n).rev() {
+        // println!("i={index}, output[{counts_value}-1=={counts_index}] = vec[{index}]=={vec_value}",
+        //     index=i,
+        //     vec_value=vec[i],
+        //     counts_value=counts[vec[i] as usize],
+        //     counts_index=(counts[vec[i] as usize] - 1) as usize);
+
+        output[(counts[vec[i] as usize] - 1) as usize] = vec[i];
+        counts[vec[i] as usize] -= 1;
+    }
+    // println!();
+
+    // println!("ADJUSTED COUNTS:");
+    // print_vec(&counts, 50);
+
+    output
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -149,6 +197,23 @@ mod tests {
         println!("elapsed: {:.2?}", elapsed);
 
         let is_sorted = check_sorted(&vec);
+
+        assert_eq!(is_sorted, true);
+    }
+
+    #[test]
+    fn run_countingsort_10000_items() {
+        let num_items = 10000;
+        let max = 1000;
+
+        let mut vec = make_random_vec(num_items, max);
+
+        let start = Instant::now();
+        let sorted = counting_sort(&mut vec[..]);
+        let elapsed = start.elapsed();
+        println!("elapsed: {:.2?}", elapsed);
+
+        let is_sorted = check_sorted(&sorted);
 
         assert_eq!(is_sorted, true);
     }
