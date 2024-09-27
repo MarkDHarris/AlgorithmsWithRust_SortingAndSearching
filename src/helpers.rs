@@ -161,8 +161,6 @@ pub fn customer_check_sorted(vec: &Vec<Customer>) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::helpers::*;
-    use std::time::Instant;
 
     #[test]
     fn check_sorted_known_sorted() {
