@@ -213,6 +213,19 @@ pub fn customer_counting_sort(vec: &mut [Customer]) -> Vec<Customer> {
     output
 }
 
+pub fn linear_search(vec: &Vec<i32>, target: i32) -> (i32, i32) {
+    let mut number_of_tests = 0;
+
+    for i in 0..vec.len() {
+        number_of_tests += 1;
+        if vec[i] == target {
+            return (i as i32, number_of_tests);
+        }
+    }
+
+    (-1, number_of_tests)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
