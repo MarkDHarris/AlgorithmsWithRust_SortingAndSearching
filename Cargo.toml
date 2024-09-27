@@ -2,7 +2,7 @@
 name = "sorting"
 version = "0.1.0"
 edition = "2021"
-default-run = "linear_search"
+default-run = "binary_search"
 
 [lib]
 name = "sorting"
@@ -35,5 +35,9 @@ path = "src/bin/customer_counting_sort.rs"
 [[bin]]
 name = "linear_search"
 path = "src/bin/linear_search.rs"
+
+[[bin]]
+name = "binary_search"
+path = "src/bin/binary_search.rs"
 
 [dependencies]

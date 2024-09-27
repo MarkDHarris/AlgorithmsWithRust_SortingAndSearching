@@ -226,10 +226,28 @@ pub fn linear_search(vec: &Vec<i32>, target: i32) -> (i32, i32) {
     (-1, number_of_tests)
 }
 
+pub fn binary_search(vec: &Vec<i32>, target: i32) -> (i32, i32) {
+    let mut number_of_tests = 0;
+    let mut lo = 0;
+    let mut hi = (vec.len() - 1) as i32;
+
+    while lo <= hi {
+        number_of_tests += 1;
+        let mid = (lo + hi) / 2;
+        if vec[mid as usize] < target {
+            lo = mid + 1;
+        } else if vec[mid as usize] > target {
+            hi = mid - 1;
+        } else {
+            return (mid as i32, number_of_tests);
+        }
+    }
+    return (-1, number_of_tests);
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::helpers::*;
     use std::time::Instant;
 
     #[test]
