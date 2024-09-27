@@ -16,4 +16,8 @@ path = "src/main.rs"
 name = "bubble_sort"
 path = "src/bin/bubble_sort.rs"
 
+[[bin]]
+name = "cocktail_shaker_bubble_sort"
+path = "src/bin/cocktail_shaker_bubble_sort.rs"
+
 [dependencies]
