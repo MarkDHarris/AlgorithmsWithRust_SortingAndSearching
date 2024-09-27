@@ -1,6 +1,19 @@
 [package]
-name = "workspace"
+name = "sorting"
 version = "0.1.0"
 edition = "2021"
+default-run = "bubble_sort"
+
+[lib]
+name = "sorting"
+path = "src/lib.rs"
+
+[[bin]]
+name = "sorting"
+path = "src/main.rs"
+
+[[bin]]
+name = "bubble_sort"
+path = "src/bin/bubble_sort.rs"
 
 [dependencies]
