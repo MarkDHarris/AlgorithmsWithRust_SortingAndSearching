@@ -2,7 +2,7 @@
 name = "sorting"
 version = "0.1.0"
 edition = "2021"
-default-run = "cocktail_shaker_bubble_sort"
+default-run = "quicksort"
 
 [lib]
 name = "sorting"
@@ -19,5 +19,9 @@ path = "src/bin/bubble_sort.rs"
 [[bin]]
 name = "cocktail_shaker_bubble_sort"
 path = "src/bin/cocktail_shaker_bubble_sort.rs"
+
+[[bin]]
+name = "quicksort"
+path = "src/bin/quicksort.rs"
 
 [dependencies]
