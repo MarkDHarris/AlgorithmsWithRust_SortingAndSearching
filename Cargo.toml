@@ -2,7 +2,7 @@
 name = "sorting"
 version = "0.1.0"
 edition = "2021"
-default-run = "binary_search"
+default-run = "sorting"
 
 [lib]
 name = "sorting"
