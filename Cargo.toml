@@ -2,7 +2,7 @@
 name = "sorting"
 version = "0.1.0"
 edition = "2021"
-default-run = "counting_sort"
+default-run = "customer_counting_sort"
 
 [lib]
 name = "sorting"
@@ -27,5 +27,9 @@ path = "src/bin/quicksort.rs"
 [[bin]]
 name = "counting_sort"
 path = "src/bin/counting_sort.rs"
+
+[[bin]]
+name = "customer_counting_sort"
+path = "src/bin/customer_counting_sort.rs"
 
 [dependencies]

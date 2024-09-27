@@ -1,3 +1,5 @@
+use super::helpers::*;
+
 pub fn bubble_sort(vec: &mut Vec<i32>) {
     let mut n = vec.len();
     let mut swapped: bool = true;
@@ -140,6 +142,73 @@ pub fn counting_sort(vec: &mut [i32]) -> Vec<i32> {
 
     // println!("ADJUSTED COUNTS:");
     // print_vec(&counts, 50);
+
+    output
+}
+
+pub fn customer_counting_sort(vec: &mut [Customer]) -> Vec<Customer> {
+    let n = vec.len();
+    let mut max = i32::MIN;
+
+    // find the max in the input array
+    for i in 0..n {
+        max = std::cmp::max(max, vec[i].num_purchases);
+    }
+
+    let mut counts: Vec<i32> = vec![0; (max + 1) as usize];
+
+    // count the occurrences of every value found in the input
+    for i in 0..n {
+        counts[vec[i].num_purchases as usize] += 1;
+    }
+
+    println!("INITIALIZED COUNTS:");
+    print_vec(&counts, 50);
+
+    // convert the counts into the number of items less than or equal to each value
+    for i in 1..counts.len() {
+        counts[i] += counts[i - 1 as usize];
+    }
+
+    println!("COUNTS of ITEMS LESS THAN EACH:");
+    print_vec(&counts, 50);
+    println!();
+
+    let mut output: Vec<Customer> = Vec::with_capacity(n);
+
+    // RESEARCH TODO: This initialization does not work and results in this error:
+    // error: process didn't exit successfully: `target\debug\counting_sort_customer.exe` (exit code: 0xc0000374, STATUS_HEAP_CORRUPTION)
+    // unsafe {
+    //     output.set_len(n);
+    // }
+
+    // so hack it instead
+    for i in 0..n {
+        output.push(Customer {
+            id: vec[i].id.clone(),
+            num_purchases: vec[i].num_purchases,
+        });
+    }
+
+    for i in (0..n).rev() {
+        println!(
+            "i={index}, output[{counts_value}-1=={counts_index}] = vec[{index}]=={vec_value}",
+            index = i,
+            vec_value = vec[i],
+            counts_value = counts[vec[i].num_purchases as usize],
+            counts_index = (counts[vec[i].num_purchases as usize] - 1) as usize
+        );
+
+        output[(counts[vec[i].num_purchases as usize] - 1) as usize] = Customer {
+            id: vec[i].id.clone(),
+            num_purchases: vec[i].num_purchases,
+        };
+        counts[vec[i].num_purchases as usize] -= 1;
+    }
+    println!();
+
+    println!("ADJUSTED COUNTS:");
+    print_vec(&counts, 50);
 
     output
 }
